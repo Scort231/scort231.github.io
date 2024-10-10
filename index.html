@@ -103,10 +103,13 @@
             document.getElementById(formId).style.display = 'flex'; // Show the chosen form
         }
 
-        // Initialize default account if none exists
+        // Initialize default accounts if none exist
         if (!localStorage.getItem('accounts')) {
             let defaultAccounts = [
-                { username: 'Test', password: 'scortiscool' }
+                { username: 'Test', password: 'scortiscool' },
+                { username: 'Scort_', password: '28000394' },
+                { username: 'Ego2Bigg', password: '28000570@ego!!' },
+                { username: 'Violet', password: '33000240' }
             ];
             localStorage.setItem('accounts', JSON.stringify(defaultAccounts));
         }
