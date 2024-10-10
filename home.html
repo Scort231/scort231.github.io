@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000; /* Black background */
+            color: #fff; /* White text */
+            padding: 20px;
+        }
+        a {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #333; /* Dark grey background */
+            color: #fff; /* White text */
+            text-decoration: none;
+            border-radius: 5px;
+            width: 200px;
+            border: 1px solid #fff; /* White border */
+        }
+        a:hover {
+            background-color: #555; /* Slightly lighter grey on hover */
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome!</h1>
+    <a href="chat.html">Chat</a>
+    <a href="games.html">Games</a>
+    <a href="#" onclick="goToDataCenter()">Data Center</a>
+
+    <script>
+        function goToDataCenter() {
+            const password = prompt("Enter the Data Center password:");
+            if (password === "tacocat") {
+                window.location.href = 'data_center.html';
+            } else {
+                alert("Incorrect password.");
+            }
+        }
+    </script>
+</body>
+</html>

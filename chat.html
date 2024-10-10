@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000; /* Black background */
+            color: #fff; /* White text */
+            padding: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 300px;
+            background-color: #333; /* Dark grey background */
+            color: #fff; /* White text */
+            border: 1px solid #fff; /* White border */
+            padding: 10px;
+        }
+        input[type="text"] {
+            width: calc(100% - 120px);
+            padding: 10px;
+            background-color: #333; /* Dark grey background */
+            color: #fff; /* White text */
+            border: 1px solid #fff; /* White border */
+        }
+        button {
+            padding: 10px;
+            background-color: #333; /* Dark grey background */
+            color: #fff; /* White text */
+            border: 1px solid #fff; /* White border */
+            border-radius: 5px;
+            margin-left: 10px;
+        }
+        button:hover {
+            background-color: #555; /* Slightly lighter grey on hover */
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Chat</h1>
+    <textarea id="chatBox" readonly></textarea><br>
+    <input type="text" id="messageInput" placeholder="Type your message here">
+    <button onclick="sendMessage()">Send</button>
+
+    <script>
+        function sendMessage() {
+            const messageInput = document.getElementById('messageInput');
+            const chatBox = document.getElementById('chatBox');
+            
+            if (messageInput.value.trim()) {
+                chatBox.value += messageInput.value + '\n';
+                messageInput.value = '';
+            }
+        }
+    </script>
+
+</body>
+</html>
