@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat</title>
+    <title>Peer-to-Peer Chat</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -41,40 +41,85 @@
 </head>
 <body>
 
-    <h1>Chat</h1>
+    <h1>Peer-to-Peer Chat</h1>
     <textarea id="chatBox" readonly></textarea><br>
     <input type="text" id="messageInput" placeholder="Type your message here">
     <button onclick="sendMessage()">Send</button>
 
+    <div style="margin-top: 20px;">
+        <button onclick="createConnection()">Create Connection</button>
+        <button onclick="joinConnection()">Join Connection</button>
+    </div>
+
     <script>
-        let username;
+        let peerConnection;
+        let dataChannel;
 
-        // Ask the user for their username when the page loads
-        window.onload = () => {
-            username = prompt("Enter your username");
-            if (!username) {
-                username = "Anonymous"; // Default username if none is provided
-            }
+        // ICE servers - STUN servers help to find the public IP address for the P2P connection
+        const configuration = {
+            iceServers: [{
+                urls: 'stun:stun.l.google.com:19302'
+            }]
         };
 
-        const ws = new WebSocket('ws://localhost:8080');
+        // Create a new peer connection
+        function createConnection() {
+            peerConnection = new RTCPeerConnection(configuration);
+            dataChannel = peerConnection.createDataChannel('chat');
+            dataChannel.onmessage = receiveMessage;
 
-        ws.onmessage = (event) => {
+            peerConnection.onicecandidate = ({candidate}) => {
+                if (candidate) {
+                    console.log(JSON.stringify(candidate));
+                }
+            };
+
+            peerConnection.createOffer().then(offer => {
+                return peerConnection.setLocalDescription(offer);
+            }).then(() => {
+                console.log(JSON.stringify(peerConnection.localDescription));
+            });
+        }
+
+        // Join an existing connection
+        function joinConnection() {
+            const answer = prompt('Paste offer here');
+            peerConnection = new RTCPeerConnection(configuration);
+
+            peerConnection.ondatachannel = (event) => {
+                dataChannel = event.channel;
+                dataChannel.onmessage = receiveMessage;
+            };
+
+            peerConnection.onicecandidate = ({candidate}) => {
+                if (candidate) {
+                    console.log(JSON.stringify(candidate));
+                }
+            };
+
+            peerConnection.setRemoteDescription(JSON.parse(answer)).then(() => {
+                return peerConnection.createAnswer();
+            }).then(answer => {
+                return peerConnection.setLocalDescription(answer);
+            }).then(() => {
+                console.log(JSON.stringify(peerConnection.localDescription));
+            });
+        }
+
+        // Receive a message from the peer
+        function receiveMessage(event) {
             const chatBox = document.getElementById('chatBox');
-            chatBox.value += event.data + '\n'; // Display received message
-        };
+            chatBox.value += 'Peer: ' + event.data + '\n';
+        }
 
+        // Send a message to the peer
         function sendMessage() {
             const messageInput = document.getElementById('messageInput');
-            
-            if (messageInput.value.trim()) {
-                const message = {
-                    username: username,
-                    text: messageInput.value
-                };
-                // Send message as JSON string to server
-                ws.send(JSON.stringify(message));
-                messageInput.value = ''; // Clear input field
+            if (messageInput.value.trim() && dataChannel) {
+                dataChannel.send(messageInput.value);
+                const chatBox = document.getElementById('chatBox');
+                chatBox.value += 'You: ' + messageInput.value + '\n';
+                messageInput.value = '';
             }
         }
     </script>
