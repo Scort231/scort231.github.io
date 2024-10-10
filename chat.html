@@ -47,12 +47,19 @@
     <button onclick="sendMessage()">Send</button>
 
     <script>
+        const ws = new WebSocket('ws://localhost:8080');
+
+        ws.onmessage = (event) => {
+            const chatBox = document.getElementById('chatBox');
+            chatBox.value += event.data + '\n';
+        };
+
         function sendMessage() {
             const messageInput = document.getElementById('messageInput');
-            const chatBox = document.getElementById('chatBox');
             
             if (messageInput.value.trim()) {
-                chatBox.value += messageInput.value + '\n';
+                // Send message to server
+                ws.send(messageInput.value);
                 messageInput.value = '';
             }
         }
