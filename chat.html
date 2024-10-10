@@ -3,106 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat</title>
+    <title>Chat Room</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #000; /* Black background */
-            color: #fff; /* White text */
+            background-color: #000;
+            color: #fff;
             display: flex;
             flex-direction: column;
-            justify-content: center; /* Center vertically */
-            align-items: center; /* Center horizontally */
-            height: 100vh; /* Full viewport height */
+            align-items: center;
+            height: 100vh;
             margin: 0;
-        }
-        h1 {
-            margin-bottom: 20px;
         }
         .chat-container {
             width: 80%;
-            max-width: 600px;
-            margin-bottom: 20px;
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
         }
-        textarea {
-            width: 100%;
+        .chat-box {
             height: 300px;
-            background-color: #333; /* Dark grey background */
-            color: #fff; /* White text */
-            border: 1px solid #fff; /* White border */
+            background-color: #333;
+            color: #fff;
+            border: 1px solid #fff;
             padding: 10px;
-            resize: none; /* Prevent resizing */
+            overflow-y: scroll;
+            margin-bottom: 10px;
+        }
+        .input-container {
+            display: flex;
         }
         input[type="text"] {
-            width: calc(100% - 100px);
+            flex: 1;
             padding: 10px;
-            background-color: #333; /* Dark grey background */
-            color: #fff; /* White text */
-            border: 1px solid #fff; /* White border */
+            background-color: #444;
+            color: #fff;
+            border: 1px solid #fff;
         }
         button {
-            padding: 10px 20px;
-            background-color: #333; /* Dark grey button background */
-            color: #fff; /* White text */
-            border: 1px solid #fff; /* White border */
-            border-radius: 5px;
-            margin: 10px; /* Spacing between buttons */
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            border: 1px solid #fff;
+            margin-left: 5px;
             cursor: pointer;
-            width: 100px; /* Set a fixed width for the buttons */
         }
         button:hover {
-            background-color: #555; /* Slightly lighter grey on hover */
+            background-color: #555;
+        }
+        .user {
+            font-weight: bold;
+        }
+        .dm-button {
+            margin: 5px;
+            padding: 5px;
         }
     </style>
 </head>
 <body>
 
     <h1>Chat Room</h1>
-    
     <div class="chat-container">
-        <textarea id="chatBox" readonly></textarea><br>
-        <input type="text" id="messageInput" placeholder="Type your message here">
-        <button onclick="sendMessage()">Send</button>
-    </div>
-
-    <div>
-        <button onclick="goToHome()">Home</button>
-        <button onclick="goToGames()">Games</button>
-        <button onclick="goToDataCenter()">Data Center</button>
-        <button onclick="logout()">Logout</button>
+        <div id="chatBox" class="chat-box" readonly></div>
+        <div class="input-container">
+            <input type="text" id="messageInput" placeholder="Type your message here">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+        <div>
+            <button class="dm-button" onclick="toggleDM('User1')">DM User1</button>
+            <button class="dm-button" onclick="toggleDM('User2')">DM User2</button>
+            <button onclick="goToHome()">Home</button>
+        </div>
     </div>
 
     <script>
-        // Check if the user is logged in
-        if (!localStorage.getItem('isLoggedIn')) {
-            window.location.href = "index.html"; // Redirect to login page if not logged in
-        }
+        const signalingServerUrl = 'ws://localhost:8080'; // Adjust if deployed
+        const signalingSocket = new WebSocket(signalingServerUrl);
+
+        const chatBox = document.getElementById('chatBox');
+        const messageInput = document.getElementById('messageInput');
+
+        signalingSocket.onmessage = (message) => {
+            chatBox.value += message.data + '\n';
+            chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom
+        };
 
         function sendMessage() {
-            const messageInput = document.getElementById('messageInput');
-            const chatBox = document.getElementById('chatBox');
-            
-            if (messageInput.value.trim()) {
-                chatBox.value += `You: ${messageInput.value}\n`;
+            const message = messageInput.value;
+            if (message) {
+                const username = 'YourUsername'; // Replace this with the actual username
+                const formattedMessage = `${username}: ${message}`;
+                signalingSocket.send(formattedMessage);
                 messageInput.value = '';
             }
         }
 
+        function toggleDM(user) {
+            const message = prompt(`Send a DM to ${user}:`);
+            if (message) {
+                const username = 'YourUsername'; // Replace this with the actual username
+                const formattedMessage = `${username} (DM to ${user}): ${message}`;
+                signalingSocket.send(formattedMessage);
+            }
+        }
+
         function goToHome() {
-            window.location.href = "home.html"; // Redirect to the home page
-        }
-
-        function goToGames() {
-            window.location.href = "games.html"; // Redirect to the games page
-        }
-
-        function goToDataCenter() {
-            window.location.href = "data_center.html"; // Redirect to the data center page
-        }
-
-        function logout() {
-            localStorage.removeItem('isLoggedIn'); // Clear login status
-            window.location.href = "index.html"; // Redirect to login page
+            window.location.href = 'home.html'; // Redirect to the home page
         }
     </script>
 
