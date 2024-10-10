@@ -3,13 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Peer-to-Peer Chat</title>
+    <title>Chat</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #000; /* Black background */
             color: #fff; /* White text */
-            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Center vertically */
+            align-items: center; /* Center horizontally */
+            height: 100vh; /* Full viewport height */
+            margin: 0;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .chat-container {
+            width: 80%;
+            max-width: 600px;
+            margin-bottom: 20px;
         }
         textarea {
             width: 100%;
@@ -18,21 +31,24 @@
             color: #fff; /* White text */
             border: 1px solid #fff; /* White border */
             padding: 10px;
+            resize: none; /* Prevent resizing */
         }
         input[type="text"] {
-            width: calc(100% - 120px);
+            width: calc(100% - 100px);
             padding: 10px;
             background-color: #333; /* Dark grey background */
             color: #fff; /* White text */
             border: 1px solid #fff; /* White border */
         }
         button {
-            padding: 10px;
-            background-color: #333; /* Dark grey background */
+            padding: 10px 20px;
+            background-color: #333; /* Dark grey button background */
             color: #fff; /* White text */
             border: 1px solid #fff; /* White border */
             border-radius: 5px;
-            margin-left: 10px;
+            margin: 10px; /* Spacing between buttons */
+            cursor: pointer;
+            width: 100px; /* Set a fixed width for the buttons */
         }
         button:hover {
             background-color: #555; /* Slightly lighter grey on hover */
@@ -41,86 +57,52 @@
 </head>
 <body>
 
-    <h1>Peer-to-Peer Chat</h1>
-    <textarea id="chatBox" readonly></textarea><br>
-    <input type="text" id="messageInput" placeholder="Type your message here">
-    <button onclick="sendMessage()">Send</button>
+    <h1>Chat Room</h1>
+    
+    <div class="chat-container">
+        <textarea id="chatBox" readonly></textarea><br>
+        <input type="text" id="messageInput" placeholder="Type your message here">
+        <button onclick="sendMessage()">Send</button>
+    </div>
 
-    <div style="margin-top: 20px;">
-        <button onclick="createConnection()">Create Connection</button>
-        <button onclick="joinConnection()">Join Connection</button>
+    <div>
+        <button onclick="goToHome()">Home</button>
+        <button onclick="goToGames()">Games</button>
+        <button onclick="goToDataCenter()">Data Center</button>
+        <button onclick="logout()">Logout</button>
     </div>
 
     <script>
-        let peerConnection;
-        let dataChannel;
-
-        // ICE servers - STUN servers help to find the public IP address for the P2P connection
-        const configuration = {
-            iceServers: [{
-                urls: 'stun:stun.l.google.com:19302'
-            }]
-        };
-
-        // Create a new peer connection
-        function createConnection() {
-            peerConnection = new RTCPeerConnection(configuration);
-            dataChannel = peerConnection.createDataChannel('chat');
-            dataChannel.onmessage = receiveMessage;
-
-            peerConnection.onicecandidate = ({candidate}) => {
-                if (candidate) {
-                    console.log(JSON.stringify(candidate));
-                }
-            };
-
-            peerConnection.createOffer().then(offer => {
-                return peerConnection.setLocalDescription(offer);
-            }).then(() => {
-                console.log(JSON.stringify(peerConnection.localDescription));
-            });
+        // Check if the user is logged in
+        if (!localStorage.getItem('isLoggedIn')) {
+            window.location.href = "index.html"; // Redirect to login page if not logged in
         }
 
-        // Join an existing connection
-        function joinConnection() {
-            const answer = prompt('Paste offer here');
-            peerConnection = new RTCPeerConnection(configuration);
-
-            peerConnection.ondatachannel = (event) => {
-                dataChannel = event.channel;
-                dataChannel.onmessage = receiveMessage;
-            };
-
-            peerConnection.onicecandidate = ({candidate}) => {
-                if (candidate) {
-                    console.log(JSON.stringify(candidate));
-                }
-            };
-
-            peerConnection.setRemoteDescription(JSON.parse(answer)).then(() => {
-                return peerConnection.createAnswer();
-            }).then(answer => {
-                return peerConnection.setLocalDescription(answer);
-            }).then(() => {
-                console.log(JSON.stringify(peerConnection.localDescription));
-            });
-        }
-
-        // Receive a message from the peer
-        function receiveMessage(event) {
-            const chatBox = document.getElementById('chatBox');
-            chatBox.value += 'Peer: ' + event.data + '\n';
-        }
-
-        // Send a message to the peer
         function sendMessage() {
             const messageInput = document.getElementById('messageInput');
-            if (messageInput.value.trim() && dataChannel) {
-                dataChannel.send(messageInput.value);
-                const chatBox = document.getElementById('chatBox');
-                chatBox.value += 'You: ' + messageInput.value + '\n';
+            const chatBox = document.getElementById('chatBox');
+            
+            if (messageInput.value.trim()) {
+                chatBox.value += `You: ${messageInput.value}\n`;
                 messageInput.value = '';
             }
+        }
+
+        function goToHome() {
+            window.location.href = "home.html"; // Redirect to the home page
+        }
+
+        function goToGames() {
+            window.location.href = "games.html"; // Redirect to the games page
+        }
+
+        function goToDataCenter() {
+            window.location.href = "data_center.html"; // Redirect to the data center page
+        }
+
+        function logout() {
+            localStorage.removeItem('isLoggedIn'); // Clear login status
+            window.location.href = "index.html"; // Redirect to login page
         }
     </script>
 
