@@ -19,15 +19,11 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px;
-            background-color: #222; /* Slightly lighter background for contrast */
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Add some subtle shadow */
         }
         input[type="text"], input[type="password"] {
             padding: 10px;
             margin: 10px 0;
-            width: 250px;
+            width: 200px;
             background-color: #333; /* Dark grey background */
             color: #fff; /* White text */
             border: 1px solid #fff; /* White border */
@@ -39,7 +35,6 @@
             border: 1px solid #fff; /* White border */
             border-radius: 5px;
             margin: 5px;
-            width: 100%;
         }
         button:hover {
             background-color: #555; /* Slightly lighter grey on hover */
@@ -53,18 +48,75 @@
         <input type="text" id="username" placeholder="Username">
         <input type="password" id="password" placeholder="Password">
         <button onclick="login()">Login</button>
+        <p id="message" style="color: red;"></p>
+    </div>
+
+    <div class="login-form">
+        <h2>Sign Up</h2>
+        <input type="text" id="newUsername" placeholder="New Username">
+        <input type="password" id="newPassword" placeholder="New Password">
+        <button onclick="signup()">Sign Up</button>
+        <p id="signupMessage" style="color: green;"></p>
     </div>
 
     <script>
+        // Initialize default account if none exists
+        if (!localStorage.getItem('accounts')) {
+            let defaultAccounts = [
+                { username: 'Test', password: 'scortiscool' }
+            ];
+            localStorage.setItem('accounts', JSON.stringify(defaultAccounts));
+        }
+
+        // Login function
         function login() {
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
+            const accounts = JSON.parse(localStorage.getItem('accounts'));
 
-            if ((username === 'Scort_' && password === '28000394') || 
-                (username === 'Ego2Bigg' && password === '28000570@ego!!')) {
-                window.location.href = 'home.html';
+            // Check if user exists and password matches
+            const user = accounts.find(acc => acc.username === username && acc.password === password);
+            
+            if (user) {
+                localStorage.setItem('isLoggedIn', 'true'); // Mark as logged in
+                document.getElementById('message').style.color = "green";
+                document.getElementById('message').textContent = "Login successful!";
+                window.location.href = "home.html"; // Redirect to home page
             } else {
-                alert('Incorrect username or password');
+                document.getElementById('message').style.color = "red";
+                document.getElementById('message').textContent = "Invalid username or password!";
+            }
+        }
+
+        // Signup function
+        function signup() {
+            const newUsername = document.getElementById('newUsername').value;
+            const newPassword = document.getElementById('newPassword').value;
+
+            if (newUsername && newPassword) {
+                const accounts = JSON.parse(localStorage.getItem('accounts'));
+
+                // Check if username already exists
+                const userExists = accounts.some(acc => acc.username === newUsername);
+
+                if (userExists) {
+                    document.getElementById('signupMessage').style.color = "red";
+                    document.getElementById('signupMessage').textContent = "Username already exists!";
+                } else {
+                    // Add new user to accounts list
+                    accounts.push({ username: newUsername, password: newPassword });
+                    localStorage.setItem('accounts', JSON.stringify(accounts));
+                    
+                    document.getElementById('signupMessage').style.color = "green";
+                    document.getElementById('signupMessage').textContent = "Account created successfully!";
+                    
+                    // Log the user in immediately after signup
+                    localStorage.setItem('isLoggedIn', 'true');
+                    window.location.href = "home.html"; // Redirect to home page
+                }
+            } else {
+                document.getElementById('signupMessage').style.color = "red";
+                document.getElementById('signupMessage').textContent = "Please enter a valid username and password!";
             }
         }
     </script>
