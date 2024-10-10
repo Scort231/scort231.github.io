@@ -30,6 +30,7 @@
             padding: 10px; /* Inner padding */
             overflow-y: scroll; /* Scrollable if content overflows */
             margin-bottom: 10px; /* Space below chat box */
+            white-space: pre-wrap; /* Maintain whitespace formatting */
         }
         .input-container {
             display: flex; /* Flexbox for input and button */
@@ -61,12 +62,12 @@
 
     <h1>Group Chat Room</h1>
     <div class="chat-container">
-        <div id="chatBox" class="chat-box" readonly></div>
+        <div id="chatBox" class="chat-box"></div>
         <div class="input-container">
             <input type="text" id="messageInput" placeholder="Type your message here">
             <button onclick="sendMessage()">Send</button>
         </div>
-        <button onclick="goToHome()">Home</button>
+        <button onclick="goToHome()">Home</button> <!-- Home button below the input -->
     </div>
 
     <script>
@@ -76,16 +77,17 @@
         const chatBox = document.getElementById('chatBox'); // Chat box element
         const messageInput = document.getElementById('messageInput'); // Message input element
 
+        // When a message is received from the server
         signalingSocket.onmessage = (message) => {
-            chatBox.value += message.data + '\n'; // Append incoming messages to chat box
+            chatBox.innerHTML += message.data + '<br>'; // Append incoming messages to chat box with line breaks
             chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom of the chat
         };
 
         function sendMessage() {
-            const message = messageInput.value; // Get message input
+            const message = messageInput.value.trim(); // Get message input
             if (message) {
                 const username = 'YourUsername'; // Replace this with the actual username
-                const formattedMessage = `${username}: ${message}`; // Format message with username
+                const formattedMessage = `<span class="user">${username}:</span> ${message}`; // Format message with username
                 signalingSocket.send(formattedMessage); // Send message to server
                 messageInput.value = ''; // Clear input field
             }
