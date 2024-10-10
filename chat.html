@@ -47,20 +47,34 @@
     <button onclick="sendMessage()">Send</button>
 
     <script>
+        let username;
+
+        // Ask the user for their username when the page loads
+        window.onload = () => {
+            username = prompt("Enter your username");
+            if (!username) {
+                username = "Anonymous"; // Default username if none is provided
+            }
+        };
+
         const ws = new WebSocket('ws://localhost:8080');
 
         ws.onmessage = (event) => {
             const chatBox = document.getElementById('chatBox');
-            chatBox.value += event.data + '\n';
+            chatBox.value += event.data + '\n'; // Display received message
         };
 
         function sendMessage() {
             const messageInput = document.getElementById('messageInput');
             
             if (messageInput.value.trim()) {
-                // Send message to server
-                ws.send(messageInput.value);
-                messageInput.value = '';
+                const message = {
+                    username: username,
+                    text: messageInput.value
+                };
+                // Send message as JSON string to server
+                ws.send(JSON.stringify(message));
+                messageInput.value = ''; // Clear input field
             }
         }
     </script>
