@@ -3,40 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
+    <title>Home</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #000;
-            color: #fff;
+            background-color: #000; /* Black background */
+            color: #fff; /* White text */
             display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            flex-direction: column;
+            justify-content: center; /* Center vertically */
+            align-items: center; /* Center horizontally */
+            height: 100vh; /* Full viewport height */
             margin: 0;
-            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #333; /* Dark grey button background */
+            color: #fff; /* White text */
+            border: 1px solid #fff; /* White border */
+            border-radius: 5px;
+            margin: 10px; /* Spacing between buttons */
+            cursor: pointer;
+            width: 200px; /* Set a fixed width for the buttons */
+        }
+        button:hover {
+            background-color: #555; /* Slightly lighter grey on hover */
         }
     </style>
 </head>
 <body>
 
-    <div>
-        <h1>Welcome to the Home Page!</h1>
-        <p>You are now logged in.</p>
-        <button onclick="logout()">Logout</button>
-    </div>
+    <h1>Welcome to the Home Page</h1>
+    <button onclick="goToChat()">Go to Chat</button>
+    <button onclick="goToGames()">Go to Games</button>
+    <button onclick="goToDataCenter()">Go to Data Center</button>
+    <button onclick="logout()">Logout</button>
 
     <script>
         // Check if the user is logged in
         if (!localStorage.getItem('isLoggedIn')) {
-            // Redirect to login page if not logged in
-            window.location.href = 'index.html'; // Change to your login page URL
+            window.location.href = "index.html"; // Redirect to login page if not logged in
         }
 
-        // Logout function
+        function goToChat() {
+            // Redirect to the chat page
+            window.location.href = "chat.html"; // Replace with your chat page URL
+        }
+
+        function goToGames() {
+            // Redirect to the games page
+            window.location.href = "games.html"; // Replace with your games page URL
+        }
+
+        function goToDataCenter() {
+            // Redirect to the data center page
+            window.location.href = "data_center.html"; // Replace with your data center page URL
+        }
+
         function logout() {
+            // Clear login status and redirect to login page
             localStorage.removeItem('isLoggedIn');
-            window.location.href = 'index.html'; // Change to your login page URL
+            window.location.href = "index.html"; // Redirect to login page
         }
     </script>
 
