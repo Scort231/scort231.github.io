@@ -27,13 +27,24 @@
         button:hover {
             background-color: #555; /* Lighter grey on hover */
         }
+        input[type="password"] {
+            padding: 10px;
+            margin: 10px;
+            background-color: #333;
+            color: #fff;
+            border: 1px solid #fff;
+            border-radius: 5px;
+            display: none; /* Initially hidden */
+        }
     </style>
 </head>
 <body>
 
     <h1>Welcome to the Home Page</h1>
     <button onclick="goToGames()">Games</button>
-    <button onclick="goToDataCenter()">Data Center</button>
+    <button onclick="showPasswordInput()">Data Center</button>
+    <input type="password" id="password" placeholder="Enter password">
+    <button id="submitPasswordBtn" style="display: none;" onclick="checkPassword()">Submit</button>
     <button onclick="goToLogin()">Logout</button> <!-- Assuming you have a logout functionality -->
 
     <script>
@@ -41,12 +52,24 @@
             window.location.href = 'games.html'; // Redirect to the games page
         }
 
-        function goToDataCenter() {
-            window.location.href = 'data-center.html'; // Redirect to the data center page (corrected file name)
-        }
-
         function goToLogin() {
             window.location.href = 'login.html'; // Redirect to the login page
+        }
+
+        function showPasswordInput() {
+            document.getElementById('password').style.display = 'block'; // Show password input
+            document.getElementById('submitPasswordBtn').style.display = 'block'; // Show submit button
+        }
+
+        function checkPassword() {
+            const password = document.getElementById('password').value;
+
+            if (password === 'tacocat') {
+                // Redirect to the Data Center page if password is correct
+                window.location.href = 'data-center.html';
+            } else {
+                alert('Incorrect password. Please try again.');
+            }
         }
     </script>
 
