@@ -45,11 +45,26 @@
       animation: flicker 3s infinite;
     }
 
+    .text-box {
+      width: 80%; /* Width of the text box */
+      text-align: center;
+      border-radius: 10px;
+      background: rgba(0, 255, 255, 0.1);
+      padding: 10px;
+      margin-bottom: 20px; /* Margin between the text and the buttons */
+      border: 1px solid rgba(0, 255, 255, 0.6);
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.6), 0 0 30px rgba(0, 255, 255, 0.3);
+      animation: flicker 3s infinite;
+      font-size: 1.2rem; /* Adjust font size */
+      color: white;
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.7), 0 0 30px #0ff;
+    }
+
     .button-container {
       display: flex;
       justify-content: center;
       gap: 20px; /* Space between buttons */
-      margin-top: 20px; /* Spacing from the title */
+      margin-top: 10px; /* Spacing from the text box */
     }
 
     .button {
@@ -106,6 +121,10 @@
 <body>
   <div class="glow">
     <h1>Welcome To Scott's Website</h1>
+  </div>
+
+  <div class="text-box">
+    Select the place you want to visit
   </div>
 
   <div class="button-container">
