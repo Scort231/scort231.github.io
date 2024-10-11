@@ -24,6 +24,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: space-between; /* Space out items vertically */
     }
 
     h1 {
@@ -90,11 +91,12 @@
     }
 
     .planet {
-      margin-top: 20px;
-      width: 150px;
-      height: auto;
+      margin-top: auto; /* Pushes the image to the bottom */
+      width: 300px; /* Increased width for a longer appearance */
+      height: auto; /* Maintain aspect ratio */
       border-radius: 10px;
       box-shadow: 0 0 15px rgba(0, 255, 255, 0.5), 0 0 40px rgba(0, 255, 255, 0.3);
+      margin-bottom: 20px; /* Add bottom margin for spacing */
     }
 
     @keyframes pulse {
@@ -142,7 +144,7 @@
   </div>
 
   <!-- Image of a galaxy-themed portable storage box -->
-  <img class="planet" src="https://as2.ftcdn.net/v2/jpg/04/03/07/91/1000_F_403079179_T1cxoTKORZQsz2xb8ExJpsnP9nfex15G.jpg" alt="Galaxy Themed Planet">
+  <img class="planet" src="https://as2.ftcdn.net/v2/jpg/04/03/07/91/1000_F_403079179_T1cxoTKORZQsz2xb8ExJpsnP9nfex15G.jpg" alt="Galaxy Themed Portable Storage Box">
 
 </body>
 </html>
