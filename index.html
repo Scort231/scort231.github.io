@@ -20,42 +20,42 @@
       color: #fff;
       font-family: 'Orbitron', sans-serif;
       overflow: hidden;
-      padding: 50px 0 0 0; /* Added top padding for spacing */
+      padding: 50px 0 0 0;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
     h1 {
-      font-size: 2rem; /* Slightly increased font size */
+      font-size: 2rem;
       animation: pulse 2s infinite;
-      letter-spacing: 4px; /* Adjusted letter spacing */
-      text-shadow: 0 0 18px rgba(255, 255, 255, 0.7), 0 0 45px #0ff; /* Adjusted shadow */
+      letter-spacing: 4px;
+      text-shadow: 0 0 18px rgba(255, 255, 255, 0.7), 0 0 45px #0ff;
     }
 
     .glow {
-      width: 85%; /* Slightly increased width */
+      width: 85%;
       text-align: center;
       border-radius: 10px;
       background: rgba(0, 255, 255, 0.1);
-      padding: 15px 0; /* Slightly increased padding */
-      margin: 0 auto 20px auto; /* Center the box, add margin below */
+      padding: 15px 0;
+      margin: 0 auto 20px auto;
       border: 1px solid rgba(0, 255, 255, 0.6);
-      box-shadow: 0 0 12px rgba(0, 255, 255, 0.6), 0 0 35px rgba(0, 255, 255, 0.3); /* Adjusted shadow */
+      box-shadow: 0 0 12px rgba(0, 255, 255, 0.6), 0 0 35px rgba(0, 255, 255, 0.3);
       animation: flicker 3s infinite;
     }
 
     .text-box {
-      width: 70%; /* Reduced width of the text box */
+      width: 70%;
       text-align: center;
       border-radius: 10px;
       background: rgba(0, 255, 255, 0.1);
-      padding: 8px; /* Reduced padding */
-      margin-bottom: 20px; /* Margin between the text and the buttons */
+      padding: 8px;
+      margin-bottom: 20px;
       border: 1px solid rgba(0, 255, 255, 0.6);
       box-shadow: 0 0 8px rgba(0, 255, 255, 0.6), 0 0 25px rgba(0, 255, 255, 0.3);
       animation: flicker 3s infinite;
-      font-size: 1rem; /* Reduced font size */
+      font-size: 1rem;
       color: white;
       text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px #0ff;
     }
@@ -63,8 +63,8 @@
     .button-container {
       display: flex;
       justify-content: center;
-      gap: 20px; /* Space between buttons */
-      margin-top: 10px; /* Spacing from the text box */
+      gap: 20px;
+      margin-top: 10px;
     }
 
     .button {
@@ -87,6 +87,14 @@
     .button:hover {
       transform: scale(1.1);
       background: rgba(0, 255, 255, 0.2);
+    }
+
+    .planet {
+      margin-top: 20px;
+      width: 150px;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.5), 0 0 40px rgba(0, 255, 255, 0.3);
     }
 
     @keyframes pulse {
@@ -132,6 +140,9 @@
     <div class="button">Chat</div>
     <div class="button">Data Center</div>
   </div>
+
+  <!-- Image of a galaxy-themed portable storage box -->
+  <img class="planet" src="1000_F_403079179_T1cxoTKORZQsz2xb8ExJpsnP9nfex15G.jpg" alt="Galaxy Themed Portable Storage Box">
 
 </body>
 </html>
