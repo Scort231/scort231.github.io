@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Center</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000; /* Black background */
+            color: #fff; /* White text */
+            text-align: center;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid #fff;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        input, select {
+            padding: 5px;
+            background-color: #333;
+            color: #fff;
+            border: 1px solid #fff;
+            width: 100%;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border: 1px solid #fff;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+        button:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Welcome to the Data Center</h1>
+
+    <table id="dataTable">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>First Initial (Last Name)</th>
+                <th>Buyer/Seller</th>
+                <th>Amount Paid ($)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Rows will be added here dynamically -->
+        </tbody>
+    </table>
+
+    <!-- Input Fields for New Row -->
+    <input type="text" id="firstName" placeholder="First Name">
+    <input type="text" id="lastInitial" placeholder="First Initial of Last Name" maxlength="1">
+    <select id="buyerSeller">
+        <option value="Buyer">Buyer</option>
+        <option value="Seller">Seller</option>
+    </select>
+    <input type="number" id="amountPaid" placeholder="Amount Paid ($)" min="0" step="0.01">
+
+    <br>
+    <!-- Button to add row -->
+    <button onclick="addRow()">Add Entry</button>
+
+    <script>
+        function addRow() {
+            const table = document.getElementById('dataTable').getElementsByTagName('tbody')[0];
+
+            // Get values from the inputs
+            const firstName = document.getElementById('firstName').value;
+            const lastInitial = document.getElementById('lastInitial').value;
+            const buyerSeller = document.getElementById('buyerSeller').value;
+            const amountPaid = document.getElementById('amountPaid').value;
+
+            // Create a new row
+            const newRow = table.insertRow();
+
+            // Add cells with the values
+            const firstNameCell = newRow.insertCell(0);
+            const lastInitialCell = newRow.insertCell(1);
+            const buyerSellerCell = newRow.insertCell(2);
+            const amountPaidCell = newRow.insertCell(3);
+
+            // Set the cell contents
+            firstNameCell.innerHTML = firstName;
+            lastInitialCell.innerHTML = lastInitial;
+            buyerSellerCell.innerHTML = buyerSeller;
+            amountPaidCell.innerHTML = '$' + parseFloat(amountPaid).toFixed(2);
+
+            // Clear the input fields
+            document.getElementById('firstName').value = '';
+            document.getElementById('lastInitial').value = '';
+            document.getElementById('buyerSeller').value = 'Buyer';
+            document.getElementById('amountPaid').value = '';
+        }
+    </script>
+
+</body>
+</html>
