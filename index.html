@@ -21,6 +21,9 @@
       font-family: 'Orbitron', sans-serif;
       overflow: hidden;
       padding: 50px 0 0 0; /* Added top padding for spacing */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     h1 {
@@ -36,10 +39,39 @@
       border-radius: 10px;
       background: rgba(0, 255, 255, 0.1);
       padding: 15px 0; /* Slightly increased padding */
-      margin: 0 auto; /* Center the box */
+      margin: 0 auto 20px auto; /* Center the box, add margin below */
       border: 1px solid rgba(0, 255, 255, 0.6);
       box-shadow: 0 0 12px rgba(0, 255, 255, 0.6), 0 0 35px rgba(0, 255, 255, 0.3); /* Adjusted shadow */
       animation: flicker 3s infinite;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px; /* Space between buttons */
+      margin-top: 20px; /* Spacing from the title */
+    }
+
+    .button {
+      width: 120px;
+      padding: 10px;
+      border-radius: 10px;
+      background: rgba(0, 255, 255, 0.1);
+      border: 1px solid rgba(0, 255, 255, 0.6);
+      color: white;
+      text-align: center;
+      font-size: 1rem;
+      text-transform: uppercase;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px #0ff;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.2s;
+      box-shadow: 0 0 8px rgba(0, 255, 255, 0.6), 0 0 20px rgba(0, 255, 255, 0.3);
+      animation: flicker 3s infinite;
+    }
+
+    .button:hover {
+      transform: scale(1.1);
+      background: rgba(0, 255, 255, 0.2);
     }
 
     @keyframes pulse {
@@ -75,5 +107,12 @@
   <div class="glow">
     <h1>Welcome To Scott's Website</h1>
   </div>
+
+  <div class="button-container">
+    <div class="button">Games</div>
+    <div class="button">Chat</div>
+    <div class="button">Data Center</div>
+  </div>
+
 </body>
 </html>
