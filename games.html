@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Games</title>
+  <title>Games - Scott's Website</title>
   <link rel="icon" href="favicon-16x16.png" type="image/png">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
@@ -16,71 +16,128 @@
     }
 
     body {
-      height: 100vh;
       background: radial-gradient(circle, #1a1a1a 40%, #000 100%);
       color: #fff;
       font-family: 'Orbitron', sans-serif;
-      overflow: hidden;
-      padding: 50px 0 0 0;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: space-between; /* Space out items vertically */
+      justify-content: center;
+      height: 100vh;
     }
 
     h1 {
       font-size: 2rem;
-      animation: pulse 2s infinite;
-      letter-spacing: 4px;
       text-shadow: 0 0 18px rgba(255, 255, 255, 0.7), 0 0 45px #0ff;
+      margin-bottom: 20px;
     }
 
-    .glow {
-      width: 85%;
-      text-align: center;
-      border-radius: 10px;
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(9, 1fr);
+      gap: 10px;
+    }
+
+    .button {
+      width: 100px;
+      height: 100px;
       background: rgba(0, 255, 255, 0.1);
-      padding: 15px 0;
-      margin: 0 auto 20px auto;
       border: 1px solid rgba(0, 255, 255, 0.6);
-      box-shadow: 0 0 12px rgba(0, 255, 255, 0.6), 0 0 35px rgba(0, 255, 255, 0.3);
-      animation: flicker 3s infinite;
+      border-radius: 10px;
+      color: transparent; /* Hide text since buttons are blank */
+      cursor: pointer;
+      transition: background 0.2s;
     }
 
-    @keyframes pulse {
-      0% {
-        transform: scale(1);
-        opacity: 1;
-      }
-      50% {
-        transform: scale(1.05);
-        opacity: 0.8;
-      }
-      100% {
-        transform: scale(1);
-        opacity: 1;
-      }
-    }
-
-    @keyframes flicker {
-      0% {
-        opacity: 1;
-      }
-      50% {
-        opacity: 0.85;
-      }
-      100% {
-        opacity: 1;
-      }
+    .button:hover {
+      background: rgba(0, 255, 255, 0.2);
     }
   </style>
 </head>
 <body>
-  <div class="glow">
-    <h1>Games</h1>
+  <h1>Games</h1>
+  <div class="grid">
+    <!-- 81 buttons for the 9x9 grid -->
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
   </div>
-
-  <!-- Additional content for games can be added here -->
-
 </body>
 </html>
