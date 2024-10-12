@@ -40,13 +40,56 @@
       text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px #0ff;
       margin-bottom: 20px;
     }
+
+    form {
+      width: 70%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px; /* Space between input elements */
+    }
+
+    input[type="text"], input[type="number"], select {
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid rgba(0, 255, 255, 0.6);
+      width: 100%;
+      font-size: 1rem;
+    }
+
+    button {
+      padding: 10px 20px;
+      border-radius: 10px;
+      border: none;
+      background: rgba(0, 255, 255, 0.6);
+      color: white;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.2s;
+    }
+
+    button:hover {
+      background: rgba(0, 255, 255, 0.8);
+    }
   </style>
 </head>
 <body>
   <h1>Data Center</h1>
   <div class="text-box">
-    Welcome to the Data Center!
+    Welcome to the Data Center! Please enter the information below.
   </div>
+  
+  <form id="dataForm">
+    <input type="text" placeholder="First Name" required>
+    <input type="text" placeholder="Last Initial" maxlength="1" required>
+    <select required>
+      <option value="" disabled selected>Select Buyer or Seller</option>
+      <option value="Buyer">Buyer</option>
+      <option value="Seller">Seller</option>
+    </select>
+    <input type="number" placeholder="Amount Paid" required>
+    <button type="submit">Submit</button>
+  </form>
+
 </body>
 </html>
-
