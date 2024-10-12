@@ -71,6 +71,14 @@
     button:hover {
       background: rgba(0, 255, 255, 0.8);
     }
+
+    .counter {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 1.2rem;
+      color: #0ff;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+    }
   </style>
 </head>
 <body>
@@ -80,16 +88,46 @@
   </div>
   
   <form id="dataForm">
-    <input type="text" placeholder="First Name" required>
+    <input type="text" placeholder="First Name" required id="firstName">
     <input type="text" placeholder="Last Initial" maxlength="1" required>
     <select required>
       <option value="" disabled selected>Select Buyer or Seller</option>
       <option value="Buyer">Buyer</option>
       <option value="Seller">Seller</option>
     </select>
-    <input type="number" placeholder="Amount Paid" required>
+    <input type="number" placeholder="Amount Paid" required id="amountPaid">
     <button type="submit">Submit</button>
   </form>
 
+  <div class="counter">
+    <p>Total Amount Paid: <span id="totalAmount">$0</span></p>
+    <p>Customer Count: <span id="customerCount">0</span></p>
+  </div>
+
+  <script>
+    const dataForm = document.getElementById('dataForm');
+    const totalAmountElement = document.getElementById('totalAmount');
+    const customerCountElement = document.getElementById('customerCount');
+    const customerSet = new Set(); // To store unique first names
+    let totalAmount = 0;
+
+    dataForm.addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent form submission
+
+      const firstName = document.getElementById('firstName').value;
+      const amountPaid = parseFloat(document.getElementById('amountPaid').value);
+      
+      // Add amount to total
+      totalAmount += amountPaid;
+      totalAmountElement.innerText = `$${totalAmount.toFixed(2)}`; // Update total amount
+
+      // Add first name to the set
+      customerSet.add(firstName);
+      customerCountElement.innerText = customerSet.size; // Update customer count
+
+      // Clear the form
+      dataForm.reset();
+    });
+  </script>
 </body>
 </html>
