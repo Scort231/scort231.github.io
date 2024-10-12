@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Scott's Website</title>
-  <link rel="icon" href="favicon-16x16.png" type="image/png">
+  <link rel="icon" href="https://www.clipartmax.com/middle/m2i8H7m2Z5K9K9i8_planet-earth-of-the-solar-system-solar-system/favicon.png" type="image/x-icon">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
 
@@ -84,7 +84,6 @@
       transition: transform 0.2s, background 0.2s;
       box-shadow: 0 0 8px rgba(0, 255, 255, 0.6), 0 0 20px rgba(0, 255, 255, 0.3);
       animation: flicker 3s infinite;
-      text-decoration: none; /* Remove underline from links */
     }
 
     .button:hover {
@@ -140,10 +139,21 @@
   </div>
 
   <div class="button-container">
-    <a class="button" href="games.html">Games</a>
-    <a class="button" href="chat.html">Chat</a>
-    <a class="button" href="data-center.html">Data Center</a>
+    <div class="button" onclick="location.href='games.html'">Games</div>
+    <div class="button" onclick="checkPassword()">Data Center</div>
+    <div class="button">Chat</div>
   </div>
+
+  <script>
+    function checkPassword() {
+      const password = prompt("Enter the password:");
+      if (password === "tacocat") {
+        window.location.href = "data-center.html";  // Redirect to data center if password is correct
+      } else {
+        alert("Incorrect password. Please try again.");
+      }
+    }
+  </script>
 
   <img class="planet" src="https://as2.ftcdn.net/v2/jpg/04/03/07/91/1000_F_403079179_T1cxoTKORZQsz2xb8ExJpsnP9nfex15G.jpg" alt="Galaxy Themed Portable Storage Box">
 
