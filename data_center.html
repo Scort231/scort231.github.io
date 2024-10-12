@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Center</title>
+    <link rel="icon" href="https://www.clipartmax.com/middle/m2i8H7m2Z5K9K9i8_planet-earth-of-the-solar-system-solar-system/favicon.png" type="image/x-icon">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: radial-gradient(circle, #1a1a1a 40%, #000 100%);
+            color: #fff;
+            text-align: center;
+            padding: 50px;
+        }
+        .input-container {
+            margin-bottom: 20px;
+        }
+        input, select {
+            padding: 10px;
+            margin: 5px;
+            border-radius: 5px;
+            border: 1px solid #0ff;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+        button {
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            background: rgba(0, 255, 255, 0.1);
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: rgba(0, 255, 255, 0.3);
+        }
+        #total-container {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Data Center</h1>
+
+<div class="input-container">
+    <input type="text" id="firstName" placeholder="First Name" required>
+    <input type="text" id="lastInitial" placeholder="Last Initial" required>
+    <select id="role" required>
+        <option value="" disabled selected>Select Role</option>
+        <option value="buyer">Buyer</option>
+        <option value="seller">Seller</option>
+    </select>
+    <input type="number" id="amountPaid" placeholder="Amount Paid" required>
+    <button onclick="addData()">Submit</button>
+</div>
+
+<div id="total-container">
+    <h2>Total Money: $<span id="totalMoney">0</span></h2>
+    <h2>Total Customers: <span id="customerCount">0</span></h2>
+</div>
+
+<script>
+    let totalMoney = 0;
+    let customerCount = 0;
+
+    function addData() {
+        const firstName = document.getElementById('firstName').value;
+        const lastInitial = document.getElementById('lastInitial').value;
+        const role = document.getElementById('role').value;
+        const amountPaid = parseFloat(document.getElementById('amountPaid').value);
+
+        if (firstName && lastInitial && role && !isNaN(amountPaid)) {
+            totalMoney += amountPaid;
+            customerCount++;
+            updateDisplay();
+            clearInputs();
+        } else {
+            alert("Please fill in all fields correctly.");
+        }
+    }
+
+    function updateDisplay() {
+        document.getElementById('totalMoney').innerText = totalMoney.toFixed(2);
+        document.getElementById('customerCount').innerText = customerCount;
+    }
+
+    function clearInputs() {
+        document.getElementById('firstName').value = '';
+        document.getElementById('lastInitial').value = '';
+        document.getElementById('role').selectedIndex = 0;
+        document.getElementById('amountPaid').value = '';
+    }
+</script>
+
+</body>
+</html>
