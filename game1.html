@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Game 1 - Scott's Website</title>
-  <link rel="icon" href="favicon-16x16.png" type="image/png">
+  <title>Game 1</title>
+  <link rel="icon" href="favicon-16x16.png" type="image/x-icon">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
 
@@ -20,44 +20,45 @@
       background: radial-gradient(circle, #1a1a1a 40%, #000 100%);
       color: #fff;
       font-family: 'Orbitron', sans-serif;
+      overflow: hidden;
+      padding: 50px 0 0 0;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
     }
 
     h1 {
       font-size: 2rem;
+      letter-spacing: 4px;
       text-shadow: 0 0 18px rgba(255, 255, 255, 0.7), 0 0 45px #0ff;
       margin-bottom: 20px;
     }
 
-    .button {
-      width: 150px;
-      padding: 10px;
+    .glow {
+      width: 85%;
+      text-align: center;
       border-radius: 10px;
       background: rgba(0, 255, 255, 0.1);
+      padding: 15px 0;
+      margin: 0 auto 20px auto;
       border: 1px solid rgba(0, 255, 255, 0.6);
-      color: white;
-      text-align: center;
-      font-size: 1rem;
-      text-transform: uppercase;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px #0ff;
-      cursor: pointer;
-      transition: transform 0.2s, background 0.2s;
-      box-shadow: 0 0 8px rgba(0, 255, 255, 0.6), 0 0 20px rgba(0, 255, 255, 0.3);
-      margin: 10px;
+      box-shadow: 0 0 12px rgba(0, 255, 255, 0.6), 0 0 35px rgba(0, 255, 255, 0.3);
     }
 
-    .button:hover {
-      transform: scale(1.1);
-      background: rgba(0, 255, 255, 0.2);
+    iframe {
+      margin-top: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.5), 0 0 40px rgba(0, 255, 255, 0.3);
     }
   </style>
 </head>
 <body>
-  <h1>Game 1</h1>
-  <div class="button" onclick="alert('Game 1 is not yet implemented!')">Start Game</div>
-  <a href="games.html" class="button">Back to Games</a>
+  <div class="glow">
+    <h1>Game 1</h1>
+  </div>
+
+  <iframe width="640" height="360" src="https://www.youtube.com/embed/Yka4SAfFCJg" title="KSI - Thick of it | Villager Cover" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 </body>
 </html>
